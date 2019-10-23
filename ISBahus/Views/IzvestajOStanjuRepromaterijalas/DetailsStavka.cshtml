@@ -1,0 +1,42 @@
+﻿@model ISBahus.Models.StavkeIzvestajaOStanjuRepromaterijala
+
+@{
+    ViewBag.Title = "Detalji o stavci";
+}
+
+<div class="create-strane">
+    <h2>Detalji o stavci</h2>
+    <h4>Stavka izveštaja o stanju repromaterijala</h4>
+    <hr style="border-top: 1px solid #fff;"//>
+    <dl class="dl-horizontal">
+        <dt>
+            Količina
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Kolicina)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Napomena)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Napomena)
+        </dd>
+
+        <dt>
+            Šifra sirovine
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SifraSirovine)
+        </dd>
+
+    </dl>
+    <p>
+        @Html.ActionLink("Izmeni stavku", "EditStavka", new { /* id = Model.PrimaryKey */ }) |
+        @Html.ActionLink("Vrati se na prethodnu stranu", "Create")
+    </p>
+</div>
+

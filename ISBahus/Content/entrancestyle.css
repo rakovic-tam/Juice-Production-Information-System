@@ -1,0 +1,76 @@
+﻿@font-face {
+    font-family: "Gotcha Regular";
+    src: url("fonts/GotchaRegular.otf");
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Gotcha Regular;
+}
+
+a {
+    font-size: 24pt !important;
+    color: #fff;
+    text-decoration: none;
+}
+
+
+    a :hover {
+        color: #fff;
+        font-size: 30pt !important;
+    }
+
+
+.fullBackground {
+    background-position: center center;
+    background-attachment: fixed;
+    background-size: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.caption {
+    background: rgba(0,0,0,0.4);
+    border-radius: 15px 25px !important;
+    margin-bottom: 40px !important;
+    font-size: 24pt;
+    text-transform: uppercase;
+    color: #fff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 27pt;
+    letter-spacing: 3px;
+}
+
+    .caption:before {
+        content: "\A";
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: #ffff33;
+        display: inline-block;
+        margin-right: 3px;
+        margin-bottom: -5px;
+    }
+
+    .caption:after {
+        content: "\A";
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: #ffff33;
+        display: inline-block;
+        margin-left: 3px;
+        margin-bottom: -5px;
+    }
+
+    .caption a:hover {
+        font-weight: 500;
+        letter-spacing: 4px;
+    }

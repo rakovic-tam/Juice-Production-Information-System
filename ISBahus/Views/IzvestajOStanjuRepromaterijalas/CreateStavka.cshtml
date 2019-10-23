@@ -1,0 +1,58 @@
+﻿@model ISBahus.Models.StavkeIzvestajaOStanjuRepromaterijala
+
+@{
+    ViewBag.Title = "Kreiranje stavke";
+}
+
+
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal create-strane">
+    <h2>Kreiraj novu stavku</h2>
+    <h4>Stavka izveštaja o stanju repromaterijala</h4>
+    <hr style="border-top: 1px solid #fff;" />
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Kolicina, "Količina", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Kolicina, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Kolicina, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Napomena, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Napomena, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Napomena, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.SifraSirovine, "Naziv sirovine", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("SifraSirovine", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.SifraSirovine, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Kreiraj" class="btn btn-default" />
+        </div>
+    </div>
+    <div>
+        @Html.ActionLink("Vrati se na prethodnu stranu", "Create")
+    </div>
+</div>
+}
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

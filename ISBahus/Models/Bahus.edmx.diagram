@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="0341ed01155846d693aa1690b61c4f10" Name="Diagram1">
+        <EntityTypeShape EntityType="ISBahusModel.IzvestajOStanjuRepromaterijala" Width="1.5" PointX="0.625" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ISBahusModel.NalogZaProizvodnju" Width="1.5" PointX="3.25" PointY="0.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ISBahusModel.Radnik" Width="1.5" PointX="0.625" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ISBahusModel.Sirovina" Width="1.5" PointX="2.625" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="ISBahusModel.StavkeIzvestajaOStanjuRepromaterijala" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ISBahusModel.ZahtevOStanjuRepromaterijala" Width="1.5" PointX="5.875" PointY="4.25" IsExpanded="true" />
+        <AssociationConnector Association="ISBahusModel.FK_IzvestajOStanjuRepromaterijala_Radnik" />
+        <AssociationConnector Association="ISBahusModel.FK_IzvestajOStanjuRepromaterijala_Radnik1" />
+        <AssociationConnector Association="ISBahusModel.FK_IzvestajOStanjuRepromaterijala_ZahtevOStanjuRepromaterijala" />
+        <AssociationConnector Association="ISBahusModel.FK_StavkeIzvestajaOStanjuRepromaterijala_IzvestajOStanjuRepromaterijala" />
+        <AssociationConnector Association="ISBahusModel.FK_NalogZaProizvodnju_Radnik" />
+        <AssociationConnector Association="ISBahusModel.FK_NalogZaProizvodnju_Radnik1" />
+        <AssociationConnector Association="ISBahusModel.FK_ZahtevOStanjuRepromaterijala_NalogZaProizvodnju" />
+        <AssociationConnector Association="ISBahusModel.FK_ZahtevOStanjuRepromaterijala_Radnik" />
+        <AssociationConnector Association="ISBahusModel.FK_ZahtevOStanjuRepromaterijala_Radnik1" />
+        <AssociationConnector Association="ISBahusModel.FK_StavkeIzvestajaOStanjuRepromaterijala_Sirovina" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

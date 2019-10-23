@@ -1,0 +1,42 @@
+﻿@model ISBahus.Models.NalogZaProizvodnju
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>NalogZaProizvodnju</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Datum)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Datum)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Radnik.Ime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Radnik.Ime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Radnik1.Ime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Radnik1.Ime)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.SifraNaloga }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

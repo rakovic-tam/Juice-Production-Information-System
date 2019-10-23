@@ -1,0 +1,21 @@
+﻿@{
+    ViewBag.Title = "Glavni meni";
+}
+
+<div class="jumbotron">
+    <h1>Dobrodošli!</h1>
+    <p class="lead">Informacioni sistem proizvodnje sokova kompanije Bahus d.o.o.</p>
+</div>
+
+<div class="row red-pocetna">
+    <div class="col-md-6">
+        <h2 class="zuti-hover-naslov">@Html.ActionLink("Zahtev o stanju repromaterijala", "Index", "ZahtevOStanjuRepromaterijalas")</h2>
+        <p>U okviru ovog podmenija, moguće je vršiti manipulacije sa zahtevima o stanju repromaterijala. U opticaju su: unos, izmena, brisanje i prikazivanje detalja o odabranom zahtevu.</p>
+        <p><a class="btn btn-default" @Html.ActionLink("Učitaj", "Index", "ZahtevOStanjuRepromaterijalas")</a></p>
+    </div>
+    <div class="col-md-6">
+        <h2 class="zuti-hover-naslov">@Html.ActionLink("Izveštaj o stanju repromaterijala", "Index", "IzvestajOStanjuRepromaterijalas")</h2>
+        <p>U okviru ovog podmenija, moguće je vršiti manipulacije sa izveštajima o stanju repromaterijala. U opticaju su: unos, izmena, brisanje i prikazivanje detalja o odabranom izveštaju.</p>
+        <p><a class="btn btn-default" @Html.ActionLink("Učitaj", "Index", "IzvestajOStanjuRepromaterijalas")</a></p>
+    </div>
+</div>

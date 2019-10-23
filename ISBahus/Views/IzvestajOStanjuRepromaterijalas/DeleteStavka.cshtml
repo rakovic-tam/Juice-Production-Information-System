@@ -1,0 +1,48 @@
+﻿@model ISBahus.Models.StavkeIzvestajaOStanjuRepromaterijala
+
+@{
+    ViewBag.Title = "Brisanje stavke";
+}
+
+
+<div class="create-strane">
+    <h2>Brisanje stavke | Da li ste sigurni da želite da obrišete ovu stavku?</h2>
+    <h4>Stavka izveštaja o stanju repromaterijala</h4>
+    <hr style="border-top: 1px solid #fff;"/>
+    <dl class="dl-horizontal">
+        <dt>
+            Količina
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Kolicina)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Napomena)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Napomena)
+        </dd>
+
+        <dt>
+            Šifra sirovine
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SifraSirovine)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Obriši stavku" class="btn btn-default" /> |
+            @Html.ActionLink("Vrati se na prethodnu stranu", "Create")
+        </div>
+    }
+</div>

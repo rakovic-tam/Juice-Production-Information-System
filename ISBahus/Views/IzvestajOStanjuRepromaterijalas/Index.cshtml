@@ -1,0 +1,53 @@
+﻿@model IEnumerable<ISBahus.Models.IzvestajOStanjuRepromaterijala>
+
+@{
+    ViewBag.Title = "Izveštaj o stanju repromaterijala";
+}
+
+<div class="create-strane">
+    <h2>Glavni meni - Izveštaj o stanju repromaterijala</h2>
+    <p>
+        @Html.ActionLink("Kreiraj novi izveštaj", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Datum)
+            </th>
+            <th>
+                Izdaje
+            </th>
+            <th>
+                Prima
+            </th>
+            <th>
+                Šifra zahteva
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Datum)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Radnik.PunoIme)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Radnik1.PunoIme)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ZahtevOStanjuRepromaterijala.SifraZahteva)
+                </td>
+                <td>
+                    @Html.ActionLink("Izmeni", "Edit", new { id = item.SifraIzvestaja }) |
+                    @Html.ActionLink("Prikaži detalje", "Details", new { id = item.SifraIzvestaja }) |
+                    @Html.ActionLink("Obriši", "Delete", new { id = item.SifraIzvestaja })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

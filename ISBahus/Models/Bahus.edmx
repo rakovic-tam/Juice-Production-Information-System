@@ -1,0 +1,575 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ISBahusModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="IzvestajOStanjuRepromaterijala">
+          <Key>
+            <PropertyRef Name="SifraIzvestaja" />
+          </Key>
+          <Property Name="SifraIzvestaja" Type="int" Nullable="false" />
+          <Property Name="Datum" Type="date" />
+          <Property Name="SifraZahteva" Type="int" />
+          <Property Name="Prima" Type="int" />
+          <Property Name="Izdaje" Type="int" />
+        </EntityType>
+        <EntityType Name="NalogZaProizvodnju">
+          <Key>
+            <PropertyRef Name="SifraNaloga" />
+          </Key>
+          <Property Name="SifraNaloga" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Datum" Type="date" />
+          <Property Name="Prima" Type="int" />
+          <Property Name="Izdaje" Type="int" />
+        </EntityType>
+        <EntityType Name="Radnik">
+          <Key>
+            <PropertyRef Name="SifraRadnika" />
+          </Key>
+          <Property Name="SifraRadnika" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ime" Type="varchar" MaxLength="50" />
+          <Property Name="Prezime" Type="varchar" MaxLength="50" />
+          <Property Name="Profesija" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Sirovina">
+          <Key>
+            <PropertyRef Name="SifraSirovine" />
+          </Key>
+          <Property Name="SifraSirovine" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Naziv" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="StavkeIzvestajaOStanjuRepromaterijala">
+          <Key>
+            <PropertyRef Name="SifraIzvestaja" />
+            <PropertyRef Name="RedniBroj" />
+          </Key>
+          <Property Name="SifraIzvestaja" Type="int" Nullable="false" />
+          <Property Name="RedniBroj" Type="int" Nullable="false" />
+          <Property Name="Kolicina" Type="int" />
+          <Property Name="Napomena" Type="varchar" MaxLength="50" />
+          <Property Name="SifraSirovine" Type="int" />
+        </EntityType>
+        <EntityType Name="ZahtevOStanjuRepromaterijala">
+          <Key>
+            <PropertyRef Name="SifraZahteva" />
+          </Key>
+          <Property Name="SifraZahteva" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Datum" Type="date" />
+          <Property Name="TekstZahteva" Type="varchar" MaxLength="50" />
+          <Property Name="Izdaje" Type="int" />
+          <Property Name="Prima" Type="int" />
+          <Property Name="SifraNalogaZaProizvodnju" Type="int" />
+        </EntityType>
+        <Association Name="FK_IzvestajOStanjuRepromaterijala_Radnik">
+          <End Role="Radnik" Type="Self.Radnik" Multiplicity="0..1" />
+          <End Role="IzvestajOStanjuRepromaterijala" Type="Self.IzvestajOStanjuRepromaterijala" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Radnik">
+              <PropertyRef Name="SifraRadnika" />
+            </Principal>
+            <Dependent Role="IzvestajOStanjuRepromaterijala">
+              <PropertyRef Name="Prima" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IzvestajOStanjuRepromaterijala_Radnik1">
+          <End Role="Radnik" Type="Self.Radnik" Multiplicity="0..1" />
+          <End Role="IzvestajOStanjuRepromaterijala" Type="Self.IzvestajOStanjuRepromaterijala" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Radnik">
+              <PropertyRef Name="SifraRadnika" />
+            </Principal>
+            <Dependent Role="IzvestajOStanjuRepromaterijala">
+              <PropertyRef Name="Izdaje" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IzvestajOStanjuRepromaterijala_ZahtevOStanjuRepromaterijala">
+          <End Role="ZahtevOStanjuRepromaterijala" Type="Self.ZahtevOStanjuRepromaterijala" Multiplicity="0..1" />
+          <End Role="IzvestajOStanjuRepromaterijala" Type="Self.IzvestajOStanjuRepromaterijala" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ZahtevOStanjuRepromaterijala">
+              <PropertyRef Name="SifraZahteva" />
+            </Principal>
+            <Dependent Role="IzvestajOStanjuRepromaterijala">
+              <PropertyRef Name="SifraZahteva" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NalogZaProizvodnju_Radnik">
+          <End Role="Radnik" Type="Self.Radnik" Multiplicity="0..1" />
+          <End Role="NalogZaProizvodnju" Type="Self.NalogZaProizvodnju" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Radnik">
+              <PropertyRef Name="SifraRadnika" />
+            </Principal>
+            <Dependent Role="NalogZaProizvodnju">
+              <PropertyRef Name="Prima" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NalogZaProizvodnju_Radnik1">
+          <End Role="Radnik" Type="Self.Radnik" Multiplicity="0..1" />
+          <End Role="NalogZaProizvodnju" Type="Self.NalogZaProizvodnju" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Radnik">
+              <PropertyRef Name="SifraRadnika" />
+            </Principal>
+            <Dependent Role="NalogZaProizvodnju">
+              <PropertyRef Name="Izdaje" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StavkeIzvestajaOStanjuRepromaterijala_Izvestaj">
+          <End Role="IzvestajOStanjuRepromaterijala" Type="Self.IzvestajOStanjuRepromaterijala" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="StavkeIzvestajaOStanjuRepromaterijala" Type="Self.StavkeIzvestajaOStanjuRepromaterijala" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IzvestajOStanjuRepromaterijala">
+              <PropertyRef Name="SifraIzvestaja" />
+            </Principal>
+            <Dependent Role="StavkeIzvestajaOStanjuRepromaterijala">
+              <PropertyRef Name="SifraIzvestaja" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StavkeIzvestajaOStanjuRepromaterijala_Sirovina">
+          <End Role="Sirovina" Type="Self.Sirovina" Multiplicity="0..1" />
+          <End Role="StavkeIzvestajaOStanjuRepromaterijala" Type="Self.StavkeIzvestajaOStanjuRepromaterijala" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sirovina">
+              <PropertyRef Name="SifraSirovine" />
+            </Principal>
+            <Dependent Role="StavkeIzvestajaOStanjuRepromaterijala">
+              <PropertyRef Name="SifraSirovine" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ZahtevOStanjuRepromaterijala_NalogZaProizvodnju">
+          <End Role="NalogZaProizvodnju" Type="Self.NalogZaProizvodnju" Multiplicity="0..1" />
+          <End Role="ZahtevOStanjuRepromaterijala" Type="Self.ZahtevOStanjuRepromaterijala" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NalogZaProizvodnju">
+              <PropertyRef Name="SifraNaloga" />
+            </Principal>
+            <Dependent Role="ZahtevOStanjuRepromaterijala">
+              <PropertyRef Name="SifraNalogaZaProizvodnju" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ZahtevOStanjuRepromaterijala_Radnik">
+          <End Role="Radnik" Type="Self.Radnik" Multiplicity="0..1" />
+          <End Role="ZahtevOStanjuRepromaterijala" Type="Self.ZahtevOStanjuRepromaterijala" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Radnik">
+              <PropertyRef Name="SifraRadnika" />
+            </Principal>
+            <Dependent Role="ZahtevOStanjuRepromaterijala">
+              <PropertyRef Name="Izdaje" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ZahtevOStanjuRepromaterijala_Radnik1">
+          <End Role="Radnik" Type="Self.Radnik" Multiplicity="0..1" />
+          <End Role="ZahtevOStanjuRepromaterijala" Type="Self.ZahtevOStanjuRepromaterijala" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Radnik">
+              <PropertyRef Name="SifraRadnika" />
+            </Principal>
+            <Dependent Role="ZahtevOStanjuRepromaterijala">
+              <PropertyRef Name="Prima" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ISBahusModelStoreContainer">
+          <EntitySet Name="IzvestajOStanjuRepromaterijala" EntityType="Self.IzvestajOStanjuRepromaterijala" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NalogZaProizvodnju" EntityType="Self.NalogZaProizvodnju" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Radnik" EntityType="Self.Radnik" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sirovina" EntityType="Self.Sirovina" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StavkeIzvestajaOStanjuRepromaterijala" EntityType="Self.StavkeIzvestajaOStanjuRepromaterijala" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ZahtevOStanjuRepromaterijala" EntityType="Self.ZahtevOStanjuRepromaterijala" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_IzvestajOStanjuRepromaterijala_Radnik" Association="Self.FK_IzvestajOStanjuRepromaterijala_Radnik">
+            <End Role="Radnik" EntitySet="Radnik" />
+            <End Role="IzvestajOStanjuRepromaterijala" EntitySet="IzvestajOStanjuRepromaterijala" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IzvestajOStanjuRepromaterijala_Radnik1" Association="Self.FK_IzvestajOStanjuRepromaterijala_Radnik1">
+            <End Role="Radnik" EntitySet="Radnik" />
+            <End Role="IzvestajOStanjuRepromaterijala" EntitySet="IzvestajOStanjuRepromaterijala" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IzvestajOStanjuRepromaterijala_ZahtevOStanjuRepromaterijala" Association="Self.FK_IzvestajOStanjuRepromaterijala_ZahtevOStanjuRepromaterijala">
+            <End Role="ZahtevOStanjuRepromaterijala" EntitySet="ZahtevOStanjuRepromaterijala" />
+            <End Role="IzvestajOStanjuRepromaterijala" EntitySet="IzvestajOStanjuRepromaterijala" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NalogZaProizvodnju_Radnik" Association="Self.FK_NalogZaProizvodnju_Radnik">
+            <End Role="Radnik" EntitySet="Radnik" />
+            <End Role="NalogZaProizvodnju" EntitySet="NalogZaProizvodnju" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NalogZaProizvodnju_Radnik1" Association="Self.FK_NalogZaProizvodnju_Radnik1">
+            <End Role="Radnik" EntitySet="Radnik" />
+            <End Role="NalogZaProizvodnju" EntitySet="NalogZaProizvodnju" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StavkeIzvestajaOStanjuRepromaterijala_Izvestaj" Association="Self.FK_StavkeIzvestajaOStanjuRepromaterijala_Izvestaj">
+            <End Role="IzvestajOStanjuRepromaterijala" EntitySet="IzvestajOStanjuRepromaterijala" />
+            <End Role="StavkeIzvestajaOStanjuRepromaterijala" EntitySet="StavkeIzvestajaOStanjuRepromaterijala" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StavkeIzvestajaOStanjuRepromaterijala_Sirovina" Association="Self.FK_StavkeIzvestajaOStanjuRepromaterijala_Sirovina">
+            <End Role="Sirovina" EntitySet="Sirovina" />
+            <End Role="StavkeIzvestajaOStanjuRepromaterijala" EntitySet="StavkeIzvestajaOStanjuRepromaterijala" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ZahtevOStanjuRepromaterijala_NalogZaProizvodnju" Association="Self.FK_ZahtevOStanjuRepromaterijala_NalogZaProizvodnju">
+            <End Role="NalogZaProizvodnju" EntitySet="NalogZaProizvodnju" />
+            <End Role="ZahtevOStanjuRepromaterijala" EntitySet="ZahtevOStanjuRepromaterijala" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ZahtevOStanjuRepromaterijala_Radnik" Association="Self.FK_ZahtevOStanjuRepromaterijala_Radnik">
+            <End Role="Radnik" EntitySet="Radnik" />
+            <End Role="ZahtevOStanjuRepromaterijala" EntitySet="ZahtevOStanjuRepromaterijala" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ZahtevOStanjuRepromaterijala_Radnik1" Association="Self.FK_ZahtevOStanjuRepromaterijala_Radnik1">
+            <End Role="Radnik" EntitySet="Radnik" />
+            <End Role="ZahtevOStanjuRepromaterijala" EntitySet="ZahtevOStanjuRepromaterijala" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ISBahusModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="IzvestajOStanjuRepromaterijala">
+          <Key>
+            <PropertyRef Name="SifraIzvestaja" />
+          </Key>
+          <Property Name="SifraIzvestaja" Type="Int32" Nullable="false" />
+          <Property Name="Datum" Type="DateTime" Precision="0" />
+          <Property Name="SifraZahteva" Type="Int32" />
+          <Property Name="Prima" Type="Int32" />
+          <Property Name="Izdaje" Type="Int32" />
+          <NavigationProperty Name="Radnik" Relationship="ISBahusModel.FK_IzvestajOStanjuRepromaterijala_Radnik" FromRole="IzvestajOStanjuRepromaterijala" ToRole="Radnik" />
+          <NavigationProperty Name="Radnik1" Relationship="ISBahusModel.FK_IzvestajOStanjuRepromaterijala_Radnik1" FromRole="IzvestajOStanjuRepromaterijala" ToRole="Radnik" />
+          <NavigationProperty Name="ZahtevOStanjuRepromaterijala" Relationship="ISBahusModel.FK_IzvestajOStanjuRepromaterijala_ZahtevOStanjuRepromaterijala" FromRole="IzvestajOStanjuRepromaterijala" ToRole="ZahtevOStanjuRepromaterijala" />
+          <NavigationProperty Name="StavkeIzvestajaOStanjuRepromaterijalas" Relationship="ISBahusModel.FK_StavkeIzvestajaOStanjuRepromaterijala_IzvestajOStanjuRepromaterijala" FromRole="IzvestajOStanjuRepromaterijala" ToRole="StavkeIzvestajaOStanjuRepromaterijala" />
+        </EntityType>
+        <EntityType Name="NalogZaProizvodnju">
+          <Key>
+            <PropertyRef Name="SifraNaloga" />
+          </Key>
+          <Property Name="SifraNaloga" Type="Int32" Nullable="false" />
+          <Property Name="Datum" Type="DateTime" Precision="0" />
+          <Property Name="Prima" Type="Int32" />
+          <Property Name="Izdaje" Type="Int32" />
+          <NavigationProperty Name="Radnik" Relationship="ISBahusModel.FK_NalogZaProizvodnju_Radnik" FromRole="NalogZaProizvodnju" ToRole="Radnik" />
+          <NavigationProperty Name="Radnik1" Relationship="ISBahusModel.FK_NalogZaProizvodnju_Radnik1" FromRole="NalogZaProizvodnju" ToRole="Radnik" />
+          <NavigationProperty Name="ZahtevOStanjuRepromaterijalas" Relationship="ISBahusModel.FK_ZahtevOStanjuRepromaterijala_NalogZaProizvodnju" FromRole="NalogZaProizvodnju" ToRole="ZahtevOStanjuRepromaterijala" />
+        </EntityType>
+        <EntityType Name="Radnik">
+          <Key>
+            <PropertyRef Name="SifraRadnika" />
+          </Key>
+          <Property Name="SifraRadnika" Type="Int32" Nullable="false" />
+          <Property Name="Ime" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Prezime" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Profesija" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="IzvestajOStanjuRepromaterijalas" Relationship="ISBahusModel.FK_IzvestajOStanjuRepromaterijala_Radnik" FromRole="Radnik" ToRole="IzvestajOStanjuRepromaterijala" />
+          <NavigationProperty Name="IzvestajOStanjuRepromaterijalas1" Relationship="ISBahusModel.FK_IzvestajOStanjuRepromaterijala_Radnik1" FromRole="Radnik" ToRole="IzvestajOStanjuRepromaterijala" />
+          <NavigationProperty Name="NalogZaProizvodnjus" Relationship="ISBahusModel.FK_NalogZaProizvodnju_Radnik" FromRole="Radnik" ToRole="NalogZaProizvodnju" />
+          <NavigationProperty Name="NalogZaProizvodnjus1" Relationship="ISBahusModel.FK_NalogZaProizvodnju_Radnik1" FromRole="Radnik" ToRole="NalogZaProizvodnju" />
+          <NavigationProperty Name="ZahtevOStanjuRepromaterijalas" Relationship="ISBahusModel.FK_ZahtevOStanjuRepromaterijala_Radnik" FromRole="Radnik" ToRole="ZahtevOStanjuRepromaterijala" />
+          <NavigationProperty Name="ZahtevOStanjuRepromaterijalas1" Relationship="ISBahusModel.FK_ZahtevOStanjuRepromaterijala_Radnik1" FromRole="Radnik" ToRole="ZahtevOStanjuRepromaterijala" />
+        </EntityType>
+        <EntityType Name="Sirovina">
+          <Key>
+            <PropertyRef Name="SifraSirovine" />
+          </Key>
+          <Property Name="SifraSirovine" Type="Int32" Nullable="false" />
+          <Property Name="Naziv" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="StavkeIzvestajaOStanjuRepromaterijalas" Relationship="ISBahusModel.FK_StavkeIzvestajaOStanjuRepromaterijala_Sirovina" FromRole="Sirovina" ToRole="StavkeIzvestajaOStanjuRepromaterijala" />
+        </EntityType>
+        <EntityType Name="StavkeIzvestajaOStanjuRepromaterijala">
+          <Key>
+            <PropertyRef Name="SifraIzvestaja" />
+            <PropertyRef Name="RedniBroj" />
+          </Key>
+          <Property Name="SifraIzvestaja" Type="Int32" Nullable="false" />
+          <Property Name="RedniBroj" Type="Int32" Nullable="false" />
+          <Property Name="Kolicina" Type="Int32" />
+          <Property Name="Napomena" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SifraSirovine" Type="Int32" />
+          <NavigationProperty Name="IzvestajOStanjuRepromaterijala" Relationship="ISBahusModel.FK_StavkeIzvestajaOStanjuRepromaterijala_IzvestajOStanjuRepromaterijala" FromRole="StavkeIzvestajaOStanjuRepromaterijala" ToRole="IzvestajOStanjuRepromaterijala" />
+          <NavigationProperty Name="Sirovina" Relationship="ISBahusModel.FK_StavkeIzvestajaOStanjuRepromaterijala_Sirovina" FromRole="StavkeIzvestajaOStanjuRepromaterijala" ToRole="Sirovina" />
+        </EntityType>
+        <EntityType Name="ZahtevOStanjuRepromaterijala">
+          <Key>
+            <PropertyRef Name="SifraZahteva" />
+          </Key>
+          <Property Name="SifraZahteva" Type="Int32" Nullable="false" />
+          <Property Name="Datum" Type="DateTime" Precision="0" />
+          <Property Name="TekstZahteva" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Izdaje" Type="Int32" />
+          <Property Name="Prima" Type="Int32" />
+          <Property Name="SifraNalogaZaProizvodnju" Type="Int32" />
+          <NavigationProperty Name="IzvestajOStanjuRepromaterijalas" Relationship="ISBahusModel.FK_IzvestajOStanjuRepromaterijala_ZahtevOStanjuRepromaterijala" FromRole="ZahtevOStanjuRepromaterijala" ToRole="IzvestajOStanjuRepromaterijala" />
+          <NavigationProperty Name="NalogZaProizvodnju" Relationship="ISBahusModel.FK_ZahtevOStanjuRepromaterijala_NalogZaProizvodnju" FromRole="ZahtevOStanjuRepromaterijala" ToRole="NalogZaProizvodnju" />
+          <NavigationProperty Name="Radnik" Relationship="ISBahusModel.FK_ZahtevOStanjuRepromaterijala_Radnik" FromRole="ZahtevOStanjuRepromaterijala" ToRole="Radnik" />
+          <NavigationProperty Name="Radnik1" Relationship="ISBahusModel.FK_ZahtevOStanjuRepromaterijala_Radnik1" FromRole="ZahtevOStanjuRepromaterijala" ToRole="Radnik" />
+        </EntityType>
+        <EntityContainer Name="ISBahusEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="IzvestajOStanjuRepromaterijalas" EntityType="Self.IzvestajOStanjuRepromaterijala" />
+          <EntitySet Name="NalogZaProizvodnjus" EntityType="Self.NalogZaProizvodnju" />
+          <EntitySet Name="Radniks" EntityType="Self.Radnik" />
+          <EntitySet Name="Sirovinas" EntityType="Self.Sirovina" />
+          <EntitySet Name="StavkeIzvestajaOStanjuRepromaterijalas" EntityType="Self.StavkeIzvestajaOStanjuRepromaterijala" />
+          <EntitySet Name="ZahtevOStanjuRepromaterijalas" EntityType="Self.ZahtevOStanjuRepromaterijala" />
+          <AssociationSet Name="FK_IzvestajOStanjuRepromaterijala_Radnik" Association="ISBahusModel.FK_IzvestajOStanjuRepromaterijala_Radnik">
+            <End Role="Radnik" EntitySet="Radniks" />
+            <End Role="IzvestajOStanjuRepromaterijala" EntitySet="IzvestajOStanjuRepromaterijalas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IzvestajOStanjuRepromaterijala_Radnik1" Association="ISBahusModel.FK_IzvestajOStanjuRepromaterijala_Radnik1">
+            <End Role="Radnik" EntitySet="Radniks" />
+            <End Role="IzvestajOStanjuRepromaterijala" EntitySet="IzvestajOStanjuRepromaterijalas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IzvestajOStanjuRepromaterijala_ZahtevOStanjuRepromaterijala" Association="ISBahusModel.FK_IzvestajOStanjuRepromaterijala_ZahtevOStanjuRepromaterijala">
+            <End Role="ZahtevOStanjuRepromaterijala" EntitySet="ZahtevOStanjuRepromaterijalas" />
+            <End Role="IzvestajOStanjuRepromaterijala" EntitySet="IzvestajOStanjuRepromaterijalas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StavkeIzvestajaOStanjuRepromaterijala_IzvestajOStanjuRepromaterijala" Association="ISBahusModel.FK_StavkeIzvestajaOStanjuRepromaterijala_IzvestajOStanjuRepromaterijala">
+            <End Role="IzvestajOStanjuRepromaterijala" EntitySet="IzvestajOStanjuRepromaterijalas" />
+            <End Role="StavkeIzvestajaOStanjuRepromaterijala" EntitySet="StavkeIzvestajaOStanjuRepromaterijalas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NalogZaProizvodnju_Radnik" Association="ISBahusModel.FK_NalogZaProizvodnju_Radnik">
+            <End Role="Radnik" EntitySet="Radniks" />
+            <End Role="NalogZaProizvodnju" EntitySet="NalogZaProizvodnjus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NalogZaProizvodnju_Radnik1" Association="ISBahusModel.FK_NalogZaProizvodnju_Radnik1">
+            <End Role="Radnik" EntitySet="Radniks" />
+            <End Role="NalogZaProizvodnju" EntitySet="NalogZaProizvodnjus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ZahtevOStanjuRepromaterijala_NalogZaProizvodnju" Association="ISBahusModel.FK_ZahtevOStanjuRepromaterijala_NalogZaProizvodnju">
+            <End Role="NalogZaProizvodnju" EntitySet="NalogZaProizvodnjus" />
+            <End Role="ZahtevOStanjuRepromaterijala" EntitySet="ZahtevOStanjuRepromaterijalas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ZahtevOStanjuRepromaterijala_Radnik" Association="ISBahusModel.FK_ZahtevOStanjuRepromaterijala_Radnik">
+            <End Role="Radnik" EntitySet="Radniks" />
+            <End Role="ZahtevOStanjuRepromaterijala" EntitySet="ZahtevOStanjuRepromaterijalas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ZahtevOStanjuRepromaterijala_Radnik1" Association="ISBahusModel.FK_ZahtevOStanjuRepromaterijala_Radnik1">
+            <End Role="Radnik" EntitySet="Radniks" />
+            <End Role="ZahtevOStanjuRepromaterijala" EntitySet="ZahtevOStanjuRepromaterijalas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StavkeIzvestajaOStanjuRepromaterijala_Sirovina" Association="ISBahusModel.FK_StavkeIzvestajaOStanjuRepromaterijala_Sirovina">
+            <End Role="Sirovina" EntitySet="Sirovinas" />
+            <End Role="StavkeIzvestajaOStanjuRepromaterijala" EntitySet="StavkeIzvestajaOStanjuRepromaterijalas" />
+          </AssociationSet>
+        </EntityContainer>
+        <Association Name="FK_IzvestajOStanjuRepromaterijala_Radnik">
+          <End Type="ISBahusModel.Radnik" Role="Radnik" Multiplicity="0..1" />
+          <End Type="ISBahusModel.IzvestajOStanjuRepromaterijala" Role="IzvestajOStanjuRepromaterijala" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Radnik">
+              <PropertyRef Name="SifraRadnika" />
+            </Principal>
+            <Dependent Role="IzvestajOStanjuRepromaterijala">
+              <PropertyRef Name="Prima" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IzvestajOStanjuRepromaterijala_Radnik1">
+          <End Type="ISBahusModel.Radnik" Role="Radnik" Multiplicity="0..1" />
+          <End Type="ISBahusModel.IzvestajOStanjuRepromaterijala" Role="IzvestajOStanjuRepromaterijala" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Radnik">
+              <PropertyRef Name="SifraRadnika" />
+            </Principal>
+            <Dependent Role="IzvestajOStanjuRepromaterijala">
+              <PropertyRef Name="Izdaje" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IzvestajOStanjuRepromaterijala_ZahtevOStanjuRepromaterijala">
+          <End Type="ISBahusModel.ZahtevOStanjuRepromaterijala" Role="ZahtevOStanjuRepromaterijala" Multiplicity="0..1" />
+          <End Type="ISBahusModel.IzvestajOStanjuRepromaterijala" Role="IzvestajOStanjuRepromaterijala" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ZahtevOStanjuRepromaterijala">
+              <PropertyRef Name="SifraZahteva" />
+            </Principal>
+            <Dependent Role="IzvestajOStanjuRepromaterijala">
+              <PropertyRef Name="SifraZahteva" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StavkeIzvestajaOStanjuRepromaterijala_IzvestajOStanjuRepromaterijala">
+          <End Type="ISBahusModel.IzvestajOStanjuRepromaterijala" Role="IzvestajOStanjuRepromaterijala" Multiplicity="1" />
+          <End Type="ISBahusModel.StavkeIzvestajaOStanjuRepromaterijala" Role="StavkeIzvestajaOStanjuRepromaterijala" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IzvestajOStanjuRepromaterijala">
+              <PropertyRef Name="SifraIzvestaja" />
+            </Principal>
+            <Dependent Role="StavkeIzvestajaOStanjuRepromaterijala">
+              <PropertyRef Name="SifraIzvestaja" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NalogZaProizvodnju_Radnik">
+          <End Type="ISBahusModel.Radnik" Role="Radnik" Multiplicity="0..1" />
+          <End Type="ISBahusModel.NalogZaProizvodnju" Role="NalogZaProizvodnju" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Radnik">
+              <PropertyRef Name="SifraRadnika" />
+            </Principal>
+            <Dependent Role="NalogZaProizvodnju">
+              <PropertyRef Name="Prima" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NalogZaProizvodnju_Radnik1">
+          <End Type="ISBahusModel.Radnik" Role="Radnik" Multiplicity="0..1" />
+          <End Type="ISBahusModel.NalogZaProizvodnju" Role="NalogZaProizvodnju" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Radnik">
+              <PropertyRef Name="SifraRadnika" />
+            </Principal>
+            <Dependent Role="NalogZaProizvodnju">
+              <PropertyRef Name="Izdaje" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ZahtevOStanjuRepromaterijala_NalogZaProizvodnju">
+          <End Type="ISBahusModel.NalogZaProizvodnju" Role="NalogZaProizvodnju" Multiplicity="0..1" />
+          <End Type="ISBahusModel.ZahtevOStanjuRepromaterijala" Role="ZahtevOStanjuRepromaterijala" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NalogZaProizvodnju">
+              <PropertyRef Name="SifraNaloga" />
+            </Principal>
+            <Dependent Role="ZahtevOStanjuRepromaterijala">
+              <PropertyRef Name="SifraNalogaZaProizvodnju" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ZahtevOStanjuRepromaterijala_Radnik">
+          <End Type="ISBahusModel.Radnik" Role="Radnik" Multiplicity="0..1" />
+          <End Type="ISBahusModel.ZahtevOStanjuRepromaterijala" Role="ZahtevOStanjuRepromaterijala" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Radnik">
+              <PropertyRef Name="SifraRadnika" />
+            </Principal>
+            <Dependent Role="ZahtevOStanjuRepromaterijala">
+              <PropertyRef Name="Izdaje" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ZahtevOStanjuRepromaterijala_Radnik1">
+          <End Type="ISBahusModel.Radnik" Role="Radnik" Multiplicity="0..1" />
+          <End Type="ISBahusModel.ZahtevOStanjuRepromaterijala" Role="ZahtevOStanjuRepromaterijala" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Radnik">
+              <PropertyRef Name="SifraRadnika" />
+            </Principal>
+            <Dependent Role="ZahtevOStanjuRepromaterijala">
+              <PropertyRef Name="Prima" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StavkeIzvestajaOStanjuRepromaterijala_Sirovina">
+          <End Type="ISBahusModel.Sirovina" Role="Sirovina" Multiplicity="0..1" />
+          <End Type="ISBahusModel.StavkeIzvestajaOStanjuRepromaterijala" Role="StavkeIzvestajaOStanjuRepromaterijala" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sirovina">
+              <PropertyRef Name="SifraSirovine" />
+            </Principal>
+            <Dependent Role="StavkeIzvestajaOStanjuRepromaterijala">
+              <PropertyRef Name="SifraSirovine" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ISBahusModelStoreContainer" CdmEntityContainer="ISBahusEntities">
+          <EntitySetMapping Name="IzvestajOStanjuRepromaterijalas">
+            <EntityTypeMapping TypeName="ISBahusModel.IzvestajOStanjuRepromaterijala">
+              <MappingFragment StoreEntitySet="IzvestajOStanjuRepromaterijala">
+                <ScalarProperty Name="SifraIzvestaja" ColumnName="SifraIzvestaja" />
+                <ScalarProperty Name="Datum" ColumnName="Datum" />
+                <ScalarProperty Name="SifraZahteva" ColumnName="SifraZahteva" />
+                <ScalarProperty Name="Prima" ColumnName="Prima" />
+                <ScalarProperty Name="Izdaje" ColumnName="Izdaje" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NalogZaProizvodnjus">
+            <EntityTypeMapping TypeName="ISBahusModel.NalogZaProizvodnju">
+              <MappingFragment StoreEntitySet="NalogZaProizvodnju">
+                <ScalarProperty Name="SifraNaloga" ColumnName="SifraNaloga" />
+                <ScalarProperty Name="Datum" ColumnName="Datum" />
+                <ScalarProperty Name="Prima" ColumnName="Prima" />
+                <ScalarProperty Name="Izdaje" ColumnName="Izdaje" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Radniks">
+            <EntityTypeMapping TypeName="ISBahusModel.Radnik">
+              <MappingFragment StoreEntitySet="Radnik">
+                <ScalarProperty Name="SifraRadnika" ColumnName="SifraRadnika" />
+                <ScalarProperty Name="Ime" ColumnName="Ime" />
+                <ScalarProperty Name="Prezime" ColumnName="Prezime" />
+                <ScalarProperty Name="Profesija" ColumnName="Profesija" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sirovinas">
+            <EntityTypeMapping TypeName="ISBahusModel.Sirovina">
+              <MappingFragment StoreEntitySet="Sirovina">
+                <ScalarProperty Name="SifraSirovine" ColumnName="SifraSirovine" />
+                <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StavkeIzvestajaOStanjuRepromaterijalas">
+            <EntityTypeMapping TypeName="ISBahusModel.StavkeIzvestajaOStanjuRepromaterijala">
+              <MappingFragment StoreEntitySet="StavkeIzvestajaOStanjuRepromaterijala">
+                <ScalarProperty Name="SifraIzvestaja" ColumnName="SifraIzvestaja" />
+                <ScalarProperty Name="RedniBroj" ColumnName="RedniBroj" />
+                <ScalarProperty Name="Kolicina" ColumnName="Kolicina" />
+                <ScalarProperty Name="Napomena" ColumnName="Napomena" />
+                <ScalarProperty Name="SifraSirovine" ColumnName="SifraSirovine" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ZahtevOStanjuRepromaterijalas">
+            <EntityTypeMapping TypeName="ISBahusModel.ZahtevOStanjuRepromaterijala">
+              <MappingFragment StoreEntitySet="ZahtevOStanjuRepromaterijala">
+                <ScalarProperty Name="SifraZahteva" ColumnName="SifraZahteva" />
+                <ScalarProperty Name="Datum" ColumnName="Datum" />
+                <ScalarProperty Name="TekstZahteva" ColumnName="TekstZahteva" />
+                <ScalarProperty Name="Izdaje" ColumnName="Izdaje" />
+                <ScalarProperty Name="Prima" ColumnName="Prima" />
+                <ScalarProperty Name="SifraNalogaZaProizvodnju" ColumnName="SifraNalogaZaProizvodnju" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="False" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

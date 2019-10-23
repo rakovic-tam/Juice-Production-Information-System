@@ -1,0 +1,51 @@
+﻿@model IEnumerable<ISBahus.Models.StavkeIzvestajaOStanjuRepromaterijala>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Kolicina)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Napomena)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IzvestajOStanjuRepromaterijala.SifraIzvestaja)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Sirovina.Naziv)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Kolicina)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Napomena)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IzvestajOStanjuRepromaterijala.SifraIzvestaja)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Sirovina.Naziv)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>

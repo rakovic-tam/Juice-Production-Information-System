@@ -1,0 +1,59 @@
+﻿@model ISBahus.Models.ZahtevOStanjuRepromaterijala
+
+@{
+    ViewBag.Title = "Detalji o zahtevu";
+}
+
+
+
+<div class="create-strane">
+    <h2>Detalji o zahtevu</h2>
+    <hr style="border-top: 1px solid #fff;"/>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Datum)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Datum)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TekstZahteva)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TekstZahteva)
+        </dd>
+
+        <dt>
+            Šifra naloga za proizvodnju
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NalogZaProizvodnju.SifraNaloga)
+        </dd>
+
+        <dt>
+            Izdaje
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Radnik.PunoIme)
+        </dd>
+
+        <dt>
+            Prima
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Radnik1.PunoIme)
+        </dd>
+
+    </dl>
+    <p>
+        @Html.ActionLink("Izmeni", "Edit", new { id = Model.SifraZahteva }) |
+        @Html.ActionLink("Vrati se na prethodnu stranu", "Index")
+    </p>
+</div>
+

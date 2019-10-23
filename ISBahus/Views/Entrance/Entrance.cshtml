@@ -1,0 +1,35 @@
+﻿
+@{
+    ViewBag.Title = "Ulaz";
+}
+
+@{
+    Layout = "";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="~/Content/entrancestyle.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+    <script src="~/Scripts/pozadine.js"></script>
+
+</head>
+<body>
+    <section class="container">
+        <div class="fullBackground"></div>
+        <p class="caption">@Html.ActionLink("IS kompanije Bahus", "Index", "Home")</p>
+
+    </section>
+    <script>
+    $('.fullBackground').fullClip({
+        images: ['@Url.Content("~/Content/images/2.jpg")', '@Url.Content("~/Content/images/1.jpg")', '@Url.Content("~/Content/images/3.jpg")', '@Url.Content("~/Content/images/4.jpg")', '@Url.Content("~/Content/images/5.jpg")',],
+            transitionTime: 2000,
+            wait: 3500
+        });</script>
+</body>
+</html>
+
+
+

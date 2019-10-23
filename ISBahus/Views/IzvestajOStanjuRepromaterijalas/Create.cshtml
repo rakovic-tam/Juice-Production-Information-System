@@ -1,0 +1,120 @@
+﻿@model ISBahus.Models.IzvestajOStanjuRepromaterijala
+
+@{
+    ViewBag.Title = "Kreiraj izveštaj";
+}
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal create-strane">
+    <h2>Kreiraj novi izveštaj</h2>
+    <h4>Izveštaj o stanju repromaterijala</h4>
+    <hr style="border-top: 1px solid #fff;" />
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Datum, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Datum, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Datum, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.SifraZahteva, "Tekst zahteva", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("SifraZahteva", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.SifraZahteva, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Prima, "Prima", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("Prima", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Prima, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Izdaje, "Izdaje", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("Izdaje", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Izdaje, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+    <div class="col-md-12 idi-na-levu-ivicu da-prodise">
+        <h3>Stavke izveštaja o stanju repromaterijala</h3>
+        <p>Da biste dodali stavku izveštaja kliknite na dugme ispod.</p>
+        @Html.ActionLink("Dodaj stavku", "CreateStavka", "IzvestajOStanjuRepromaterijalas")
+    </div>
+
+    <div style="padding-bottom: 50px;">
+        <table class="table">
+            <tr>
+                <th>
+                    Redni broj
+                </th>
+                <th>
+                    Količina
+                </th>
+                <th>
+                    Napomena
+                </th>
+                <th>
+                    Naziv sirovine
+                </th>
+            </tr>
+
+            @foreach (var stavka in Model.StavkeIzvestajaOStanjuRepromaterijalas)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => stavka.RedniBroj)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => stavka.Kolicina)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => stavka.Napomena)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => stavka.Sirovina.Naziv)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Izmeni stavku", "EditStavka", new { id = stavka.RedniBroj })  |
+                        @Html.ActionLink("Detalji o stavci", "DetailsStavka", new { id = stavka.RedniBroj }) |
+                        @Html.ActionLink("Obriši stavku", "DeleteStavka", new { id = stavka.RedniBroj })
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10" style="margin-left: 0%;">
+            <input type="submit" value="Kreiraj" class="btn btn-default" />
+        </div>
+    </div>
+    <div>
+        @Html.ActionLink("Vrati se na prethodnu stranu", "Index")
+    </div>
+</div>
+}
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+
+
+
